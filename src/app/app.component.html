@@ -1,1 +1,51 @@
-<button mat-raised-button>hello</button>
+<section class="container">
+  <form [formGroup]="map_form" class="py-2 px-2 flex flex-col justify-center">
+    <div>
+      <mat-form-field class="w-full">
+        <mat-label>Map Location Display Name</mat-label>
+        <input type="search" matInput formControlName="location_name" />
+        <mat-error *ngIf="map_form.get('location_name').hasError('required')"
+          >Please enter location name.</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="space-x-2">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="add_btn"
+        (click)="addLocation()"
+      >
+        + Add Location
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="del_btn"
+        (click)="deleteLocation()"
+      >
+        - Delete Location
+      </button>
+    </div>
+  </form>
+  <main class="flex justify-center">
+    <google-map
+      #map
+      height="367px"
+      width="631px"
+    
+      [zoom]="zoom"
+      (mapClick)="addMarker($event)"
+    >
+      <ng-container *ngIf="add_marker">
+        <map-marker
+          *ngFor="let markerPosition of markerPositions"
+          [position]="markerPosition"
+          [options]="markerOptions"
+        ></map-marker>
+      </ng-container>
+    </google-map>
+  </main>
+</section>
+
+{{ markerPositions | json }}
