@@ -1,7 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GoogleMap, MapMarker } from '@angular/google-maps';
-
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -12,8 +10,8 @@ export class AppComponent {
   del_btn: boolean = true;
   add_marker: boolean = false;
 
-  currentLatitude: number;
-  currentLongitude: number;
+  currentLatitude!: number;
+  currentLongitude!: number;
   center: any;
 
   map_form: FormGroup;
@@ -22,7 +20,7 @@ export class AppComponent {
   markerOptions: any = { draggable: false };
   markerPositions: any[] = [];
 
-  @ViewChild('map') map: google.maps.Map;
+  // @ViewChild('map') map!: any;
 
   constructor() {
     this.map_form = new FormGroup({
